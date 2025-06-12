@@ -9,6 +9,8 @@ import (
 type Config struct {
 	Host     string `json:"host"`
 	Port     int    `json:"port"`
+	RemoteHost string `json:"remoteHost"`
+
 	UserName string `json:"username"`
 	Password string `json:"password"`
 	ClientID string `json:"clientId"`
