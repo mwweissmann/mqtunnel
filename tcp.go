@@ -26,9 +26,10 @@ type TCPConnection struct {
 	tcpClosedCh chan error
 }
 
-func NewTCPConnection(port int, tun *Tunnel) (*TCPConnection, error) {
+func NewTCPConnection(port int, host string, tun *Tunnel) (*TCPConnection, error) {
 	ret := TCPConnection{
 		port:        port,
+		remoteHost:  host,
 		tunnel:      tun,
 		tcpClosedCh: tun.tcpClosedCh,
 	}
