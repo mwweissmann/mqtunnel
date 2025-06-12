@@ -77,7 +77,7 @@ func NewTunnelFromControl(ctx context.Context, mqttBroker *mqttBroker, ctl contr
 		mqttBroker:  mqttBroker,
 	}
 
-	tcon, err := NewTCPConnection(ret.LocalPort, &ret)
+	tcon, err := NewTCPConnection(ret.LocalPort, mqttBroker.conf.RemoteHost, &ret)
 	if err != nil {
 		return nil, fmt.Errorf("new tcp connection error, %w", err)
 	}
