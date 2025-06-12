@@ -21,6 +21,7 @@ type TCPConnection struct {
 
 	conn        net.Conn
 	isLocal     bool
+	remoteHost  string
 	tunnel      *Tunnel
 	tcpClosedCh chan error
 }
@@ -40,7 +41,7 @@ func (con *TCPConnection) connect(ctx context.Context) (net.Conn, error) {
 	zap.S().Debugw("start connecting", zap.Int("local_port", con.tunnel.LocalPort))
 
 	// TODO: Does we want to any hosts instead of localhost?
-	addr, err := net.ResolveTCPAddr("tcp", fmt.Sprintf("localhost:%d", con.port))
+	addr, err := net.ResolveTCPAddr("tcp", fmt.Sprintf("%s:%d", con.remoteHost, con.port))
 	if err != nil {
 		return nil, fmt.Errorf("ResolveTCPAddr error, %w", err)
 	}
