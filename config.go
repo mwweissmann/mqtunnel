@@ -9,7 +9,7 @@ import (
 type Config struct {
 	Host     string `json:"host"`
 	Port     int    `json:"port"`
-	RemoteHost string `json:"remoteHost"`
+	RemoteHost string `json:"remotehost"`
 
 	UserName string `json:"username"`
 	Password string `json:"password"`
@@ -33,5 +33,10 @@ func ReadConfig(filePath string) (Config, error) {
 	if err := json.Unmarshal(buf, &ret); err != nil {
 		return ret, fmt.Errorf("read config marshal error, %w", err)
 	}
+
+	if (ret.RemoteHost == "") {
+		ret.RemoteHost = "localhost"
+	}
+
 	return ret, nil
 }
